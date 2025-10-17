@@ -1,33 +1,32 @@
 import java.util.*;
 
 public class Main {
-
+	static int[] arr;
 	static int[] ch;
-	static int[] output;
-
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
-		int m = sc.nextInt();
+		int r = sc.nextInt();
 
-		ch = new int[n];
-		output = new int[m];
-		DFS(n,m,0);
+		arr = new int[r];
+		ch = new int[n+1];
+
+		recursive(n,r,0);
 	}
 
-	static void DFS(int n, int r, int depth) {
+	static void recursive(int n, int r, int depth) {
 		if(depth == r) {
 			for(int i = 0; i < r; i++) {
-				System.out.print(output[i] + " ");
+				System.out.print(arr[i] + " ");
 			}
 			System.out.println();
 		} else {
-			for(int i=0; i<n;++i) {
-				if(ch[i] == 0) {
-					ch[i] = 1;
-					output[depth] = i +1;
-					DFS(n,r,depth+1);
-					ch[i] = 0;
+			for(int i = 1; i<=n;++i) {
+				if(ch[i] ==0) {
+					ch[i] =1;
+					arr[depth] = i;
+					recursive(n,r,depth+1);
+					ch[i] =0;
 				}
 			}
 		}
